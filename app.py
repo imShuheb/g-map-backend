@@ -16,8 +16,6 @@ CORS(app)
 
 class RouteService:
     def __init__(self):
-        # CACHE_DIR = os.environ.get("CACHE_DIR", ".")
-        # self.cache_file = os.path.join(CACHE_DIR, "bengaluru_graph.pickle")
         self.graph = None
         self.last_update = None
         self.graph_lock = threading.Lock()
@@ -219,8 +217,8 @@ def shortest_path():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-@app.route("/", defaults={"path": ""})
-@app.route("/<path:path>")
+
+@app.route("/", method=["GET"])
 def all_routes(path):
     return f"""
     <!DOCTYPE html>
